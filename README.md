@@ -162,9 +162,24 @@ sonar.tests=__tests__
 
 ## テストカバレッジの計測
 
-カバレッジの計測は自動計測でサポートされていない。CI-based Analysisを設定する。
+カバレッジの計測はAutomatic Analysisで[サポートされていない](https://docs.sonarcloud.io/enriching/test-coverage/javascript-typescript-test-coverage/)。CI-based Analysisを設定する。
 
 CIの実行時にレポートファイルをLCOV形式で出力し、SonarCloudのスキャナーが取得できること
+
+GitHub Actionsの設定ファイル `.github/workflows/build.yml` でSonarCloudの解析前にテストを実行し、カバレッジレポートを生成する。
+
+```git
+       - uses: actions/checkout@v2
+         with:
+           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
++      - name: Install dependencies
++        run: npm install --include=dev
++      - name: Test and coverage
++        run: npm test
+       - name: SonarCloud Scan
+         uses: SonarSource/sonarcloud-github-action@master
+         env:
+```
 
 sonar-project.propertiesにパスを指定
 jestは `./coverage/lcov.info` にカバレッジ計測結果を出力する。
@@ -208,6 +223,12 @@ npm install --save-dev ts-node
 
 ```js
   preset: "ts-jest",
+```
+
+カバレッジの計測には `coverage` オプションを指定する。
+
+```js
+"test": "jest --coverage"
 ```
 
 カバレッジの集計対象からトランスパイルしたコードを除外する
