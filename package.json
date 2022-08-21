@@ -1,12 +1,12 @@
 {
-  "name": "sonarcloud practice",
+  "name": "sonarcloud-practice",
   "version": "1.0.0",
   "description": "sonarcloud practice",
   "main": ".js",
   "scripts": {
     "build": "rm -rf dist && tsc",
     "mocha": "ts-mocha --project tsconfig.json test/**/*.spec.ts",
-    "jest": "jest"
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",

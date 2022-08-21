@@ -5,7 +5,7 @@ export const calculate = (exp: string): number => {
   const space: number[] = [];
 
   for (const c of exp) {
-    if (c >= '0' && c <= '9') {
+    if (c >= "0" && c <= "9") {
       const add = parseInt(c);
       space.push(add);
     } else {
@@ -13,24 +13,24 @@ export const calculate = (exp: string): number => {
       const second = space.pop();
       const first = space.pop();
       if (second === undefined || first === undefined) {
-        throw new Error('unexpected expression');
+        throw new Error("unexpected expression");
       }
 
       // 演算子の実施結果を配列の末尾に挿入する
       switch (c) {
-        case '+': {
+        case "+": {
           space.push(first + second);
           break;
         }
-        case '-': {
+        case "-": {
           space.push(first - second);
           break;
         }
-        case '*': {
+        case "*": {
           space.push(first * second);
           break;
         }
-        case '/': {
+        case "/": {
           space.push(first / second);
           break;
         }
@@ -38,7 +38,7 @@ export const calculate = (exp: string): number => {
     }
   }
   const last = space.pop();
-  if (typeof last !== 'number') {
+  if (typeof last !== "number") {
     throw new Error(`invalid result: ${last}`);
   }
   return last;
@@ -59,35 +59,35 @@ export const decode = (exp: string): string => {
   let space: string[] = [];
 
   for (const c of exp) {
-    if (c >= '0' && c <= '9') {
+    if (c >= "0" && c <= "9") {
       space.push(c);
     } else {
       const second = space.pop();
       const first = space.pop();
       if (second === undefined || first === undefined) {
-        throw new Error('unexpected expression');
+        throw new Error("unexpected expression");
       }
 
       // 演算子を元に復元した計算式を配列の末尾に挿入する
       switch (c) {
-        case '+': {
+        case "+": {
           const item = `${first}+${second}`;
           space.push(item);
           break;
         }
-        case '-': {
+        case "-": {
           const item = `${first}-${second}`;
           space.push(item);
           break;
         }
-        case '*': {
+        case "*": {
           const _first = updatePriority(first);
           const _second = updatePriority(second);
           const item = `${_first}*${_second}`;
           space.push(item);
           break;
         }
-        case '/': {
+        case "/": {
           const _first = updatePriority(first);
           const _second = updatePriority(second);
           const item = `${_first}/${_second}`;
@@ -98,7 +98,7 @@ export const decode = (exp: string): string => {
     }
   }
   const last = space.pop();
-  if (typeof last !== 'string') {
+  if (typeof last !== "string") {
     throw new Error(`invalid result: ${last}`);
   }
   return last;
