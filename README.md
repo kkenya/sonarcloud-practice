@@ -10,6 +10,12 @@ publicなリポジトリならSonarCloudによる静的解析を無料で利用�
 - TypeScript(JavaScript)
 - Visual Studio Code
 
+## SonarCloudとSonarQube
+
+Sonar
+SonarQube
+SonarCloud
+
 ## SonarCloud
 
 静的コード解析サービス。20以上の言語に対応している。
@@ -150,6 +156,9 @@ sonar.tests=__tests__
 |:--|:--|
 |sonar.sources | コード全体のパスを指定|
 |sonar.tests|テストコードのパスを指定|
+|sonar.typescript.tsconfigPath|tsconfig.jsonのパスを指定|
+
+言語ごとのkeyはGeneral Settingsから確認できる
 
 ## テストカバレッジの計測
 
